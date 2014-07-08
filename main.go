@@ -14,7 +14,16 @@ import (
 func main() {
 
   goji.Get("/hello/:name", hello)
-  goji.Get("/account/:id", viewAccount)
+  goji.Get("/accounts/:id", viewAccount)
+  goji.Put("/accounts/:id", updateAccount)
+  goji.Post("/data", makeDatum)
+  goji.Get("/data/:id", viewDatum)
+  goji.Put("/data/:id", upDatum)
+  goji.Delete("/data/:id", deleteDatum)
+  goji.Get("/categories/:id", viewCategory)
+  goji.Get("/categories", allCategories)
+  goji.Get("/regenerate", regenerateKey)
+  goji.Get("/", apiInfo)
   goji.Serve()
 }
 
@@ -32,7 +41,7 @@ func viewAccount(c web.C, w http.ResponseWriter, r *http.Request) {
   defer session.Close()
   colA := session.DB("trackme").C("accounts")
   if colA != nil {
-    fmt.Println("Got a collection object")
+    fmt.Println("Got an account collection")
   }
   result := Account{}
   err = colA.Find(bson.M{"key": c.URLParams["id"]}).One(&result)

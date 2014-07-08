@@ -7,19 +7,19 @@ import (
 
 // Models
 type Account struct {
-  Id bson.ObjectId `bson:"_id"`
+  Id bson.ObjectId `bson:"_id" json:"_id"`
   Location struct {
-    Latitude float32
-    Longitude float32
-  }
-  Username string
-  Gender string
-  Birthdate time.Time
-  Admin bool
-  FullAccess bool `bson:"full_access"`
-  Key string
-  Created time.Time
-  Updated time.Time
+    Latitude float32 `json:"latitude"`
+    Longitude float32 `json:"longitude"`
+  } `json:"location"`
+  Username string `json:"username"`
+  Gender string `json:"gender"`
+  Birthdate time.Time `json:"birthdate"`
+  Admin bool `json:"admin"`
+  FullAccess bool `bson:"full_access" json:"full_access"`
+  Key string `json:"key"`
+  Created time.Time `json:"created"`
+  Updated time.Time `json:"updated"`
 }
 
 type Datum struct {
